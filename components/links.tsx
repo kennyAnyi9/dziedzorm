@@ -62,4 +62,9 @@ const LINKS: Link[] = [
     text: "journal",
     external: false,
   },
+  {
+    href: "/merch",
+    text: "merch",
+    external: false,
+  },
 ];

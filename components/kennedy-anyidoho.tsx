@@ -1,6 +1,6 @@
 "use client";
 
-import { Ascii, fonts } from "better-ascii-react";
+import { Ascii, fonts } from "better-ascii";
 
 export function KennedyAnyidoho() {
   return (
