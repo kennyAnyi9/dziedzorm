@@ -1,14 +1,17 @@
 "use client";
 
-import { Ascii } from "better-ascii-react";
+import { Ascii, fonts } from "better-ascii-react";
 
 export function KennedyAnyidoho() {
   return (
-    <Ascii
-      as="div"
-      className="font-extrabold text-[0.1rem] lg:text-[0.2rem] text-[#c56d50]"
-    >
-      KENNEDY DZIEDZORM ANYIDOHO
-    </Ascii>
+    <>
+      <Ascii
+        font={fonts.deltaCorpsPriest1}
+        className="text-[4px] leading-[1.15] tracking-tight"
+      >
+        Ken
+      </Ascii>
+      <p className="mt-2 text-neutral-600">Builds interesting stuff</p>
+    </>
   );
 }
