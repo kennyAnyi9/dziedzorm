@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useSound } from "@/hooks/use-sound";
 import {
   ArrowUpRight,
   Hammer,
@@ -10,22 +9,21 @@ import {
   Rocket,
   type LucideIcon,
 } from "lucide-react";
-import { uChatScrollButtonSound } from "@/lib/u-chat-scroll-button";
 import { ThoughtBubble } from "@/components/thought-bubble";
+import { playSound } from "@/lib/sound-engine";
+import { uChatScrollButtonSound } from "@/lib/u-chat-scroll-button";
 
 export function MapLinksOverlay({
   onJournalClick,
 }: {
   onJournalClick?: () => void;
 }) {
-  const [play] = useSound(uChatScrollButtonSound);
-
   return (
     <>
       {MAP_LINKS.map((link) => {
         const isJournal = link.id === "journal";
         const commonClass =
-          "group absolute inline-flex items-center gap-1.5 text-base text-neutral-400 hover:text-neutral-200 transition-colors";
+          "group absolute inline-flex items-center gap-1.5 text-base text-neutral-400 hover:text-neutral-200 transition-colors cursor-pointer";
         const commonStyle = { left: link.x, top: link.y };
 
         if (isJournal && onJournalClick) {
@@ -33,7 +31,7 @@ export function MapLinksOverlay({
             <button
               key={link.href}
               onClick={() => {
-                play();
+                playSound(uChatScrollButtonSound.dataUri, { volume: 0.8 });
                 onJournalClick();
               }}
               className={commonClass}
@@ -59,7 +57,6 @@ export function MapLinksOverlay({
               : {})}
             className={commonClass}
             style={commonStyle}
-            onMouseEnter={() => play()}
           >
             <ThoughtBubble text={link.description} />
             {link.icon ? (
@@ -91,7 +88,7 @@ const MAP_LINKS: MapLink[] = [
   {
     href: "https://better-ascii.dziedzorm.xyz",
     text: "better-ascii",
-    description: "ASCII art generator for the web",
+    description: "ASCII art library for react",
     external: true,
     x: "5%",
     y: "20%",
@@ -99,7 +96,8 @@ const MAP_LINKS: MapLink[] = [
   {
     href: "https://dup.it.com",
     text: "dup.it",
-    description: "Duplicate anything, instantly",
+    description:
+      "Share text and code snippets securely. You control everything!",
     external: true,
     x: "18%",
     y: "55%",
@@ -107,7 +105,7 @@ const MAP_LINKS: MapLink[] = [
   {
     href: "https://mindops.dziedzorm.xyz",
     text: "mindOps",
-    description: "Mental models for developers",
+    description: "AI powered task management tool",
     external: true,
     x: "42%",
     y: "18%",

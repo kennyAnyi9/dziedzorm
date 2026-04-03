@@ -15,6 +15,9 @@ export function JournalOverlay({ docs }: { docs: Doc[] }) {
           >
             <span className="text-xs text-neutral-600">{String(i + 1).padStart(2, "0")}</span>
             {doc.metadata.title}
+            <span className="text-xs text-neutral-600 font-mono">
+              {new Date(doc.metadata.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            </span>
             <span className="absolute -bottom-px left-0 h-px w-0 group-hover:w-full transition-all duration-300 bg-[oklch(62.7%_0.265_303.9)]" />
           </Link>
         ))}

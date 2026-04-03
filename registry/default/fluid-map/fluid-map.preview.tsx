@@ -1,6 +1,6 @@
 "use client";
 
-import { FluidMap } from "@/registry/default/fluid-map";
+import { FluidMap } from "./fluid-map";
 
 export function FluidMapPreview() {
   return (

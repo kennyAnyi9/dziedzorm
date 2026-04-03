@@ -11,7 +11,7 @@
       "dependencies": ["svg-dotted-map"],
       "files": [
         {
-          "path": "registry/default/fluid-map.tsx",
+          "path": "registry/default/fluid-map/fluid-map.tsx",
           "type": "registry:component"
         }
       ]

@@ -44,10 +44,18 @@ export default async function JournalPost({
   const { previous, next } = findNeighbour(allDocs, slug);
 
   return (
-    <main className="min-h-screen max-w-2xl mx-auto w-full px-4 sm:px-6 py-8">
+    <main className="min-h-screen max-w-3xl mx-auto w-full px-4 sm:px-6 py-16">
       <article className="prose prose-invert prose-neutral max-w-none">
         <h1>{doc.metadata.title}</h1>
         <p className="text-muted-foreground">{doc.metadata.description}</p>
+        <p className="text-sm text-neutral-500 font-mono not-prose -mt-2 mb-6">
+          {new Date(doc.metadata.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+          {doc.metadata.updatedAt !== doc.metadata.createdAt && (
+            <span className="ml-3 text-neutral-600">
+              updated {new Date(doc.metadata.updatedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            </span>
+          )}
+        </p>
         <MDX code={doc.content} />
       </article>
 

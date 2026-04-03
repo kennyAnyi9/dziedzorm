@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import { LiquidGlassFilters } from "@/components/liquid-glass-filters";
+import { Footer } from "@/components/footer";
+import { NavigationSoundProvider } from "@/components/navigation-sound-provider";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -27,15 +29,17 @@ export default function RootLayout({
       className={cn("font-mono", jetbrainsMono.variable)}
       suppressHydrationWarning
     >
-      <body className="font-mono antialiased">
+      <body className="font-mono antialiased flex flex-col min-h-screen">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
         >
           <LiquidGlassFilters />
+          <NavigationSoundProvider />
           {/*<DarkModeToggle />*/}
-          {children}
+          <div className="flex-1 flex flex-col">{children}</div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -4,11 +4,12 @@ import { useState } from "react";
 import { KennedyAnyidoho } from "@/components/kennedy-anyidoho";
 import { MapLinksOverlay } from "@/components/map-links";
 import { JournalOverlay } from "@/components/journal-overlay";
-import { DottedMap } from "@/components/ui/dotted-map";
-import { Footer } from "@/components/footer";
+import { FluidMap } from "@/registry/default/fluid-map/fluid-map";
 import { ArrowLeft } from "lucide-react";
 import { Ascii, fonts } from "better-ascii";
 import type { Doc } from "@/lib/journal/types";
+import { playSound } from "@/lib/sound-engine";
+import { uChatScrollButtonSound } from "@/lib/u-chat-scroll-button";
 
 type View = "home" | "journal";
 
@@ -18,7 +19,7 @@ export function HomeView({ docs }: { docs: Doc[] }) {
   const isHome = view === "home";
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 relative">
+    <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-8 relative">
       {/* Hero — animates between name and journal heading */}
       <div className="mb-8 relative w-full max-w-4xl flex justify-center">
         <div
@@ -48,8 +49,11 @@ export function HomeView({ docs }: { docs: Doc[] }) {
             Thoughts, technical notes, and things I find interesting.
           </p>
           <button
-            onClick={() => setView("home")}
-            className="mt-4 inline-flex items-center gap-2 text-neutral-500 hover:text-neutral-200 transition-colors text-sm"
+            onClick={() => {
+              playSound(uChatScrollButtonSound.dataUri, { volume: 0.8 });
+              setView("home");
+            }}
+            className="mt-4 inline-flex items-center gap-2 text-neutral-500 hover:text-neutral-200 transition-colors text-sm cursor-pointer"
           >
             <ArrowLeft size={14} strokeWidth={1.5} />
             back
@@ -58,8 +62,8 @@ export function HomeView({ docs }: { docs: Doc[] }) {
       </div>
 
       {/* Map — persistent background with swappable overlay */}
-      <div className="w-full max-w-4xl relative">
-        <DottedMap
+      <div className="w-full max-w-5xl relative">
+        <FluidMap
           markers={[{ lat: 7.9465, lng: -1.0232, size: 0.8, pulse: true }]}
           markerColor="oklch(62.7% 0.265 303.9)"
           dotRadius={0.15}
@@ -89,9 +93,6 @@ export function HomeView({ docs }: { docs: Doc[] }) {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0">
-        <Footer />
-      </div>
     </main>
   );
 }

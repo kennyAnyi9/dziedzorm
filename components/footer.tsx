@@ -36,7 +36,7 @@ export function Footer() {
       ))}
 
       <Link
-        href="/resume"
+        href="https://ishortn.ink/ken_resume"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-200 border border-neutral-700 hover:border-[oklch(62.7%_0.265_303.9)] hover:[box-shadow:0_0_8px_oklch(62.7%_0.265_303.9)] rounded-md px-2.5 py-1 transition-all duration-300"
