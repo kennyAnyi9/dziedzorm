@@ -309,3 +309,5 @@ export function FluidMap<M extends Marker = Marker>({
     </svg>
   )
 }
+
+export default FluidMap
