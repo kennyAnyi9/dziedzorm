@@ -7,11 +7,13 @@ export function KennedyAnyidoho() {
     <>
       <Ascii
         font={fonts.deltaCorpsPriest1}
-        className="text-[4px] leading-[1.15] tracking-tight"
+        className="text-[4px] leading-[1.15] text-center tracking-tight whitespace-pre"
       >
-        Ken
+        Kennedy Anyidoho
       </Ascii>
-      <p className="mt-2 text-neutral-600">Builds interesting stuff</p>
+      <p className="mt-2 max-w-lg text-neutral-600 text-center">
+        Hey there! I am a software engineer, I build interesting stuff.
+      </p>
     </>
   );
 }

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "dziedzorm",
+  "homepage": "https://dziedzorm.xyz",
+  "items": [
+    {
+      "name": "fluid-map",
+      "type": "registry:component",
+      "title": "Fluid Map",
+      "description": "A dotted world map with clockwise swirl physics on mouse interaction. Dots animate with spring-damping and settle like dust.",
+      "dependencies": ["svg-dotted-map"],
+      "files": [
+        {
+          "path": "registry/default/fluid-map/fluid-map.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}

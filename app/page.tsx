@@ -1,11 +1,7 @@
-import { KennedyAnyidoho } from "@/components/kennedy-anyidoho";
-import { Links } from "@/components/links";
+import { getAllDocs } from "@/lib/journal/documents";
+import { HomeView } from "@/components/home-view";
 
 export default function Home() {
-  return (
-    <main className="h-screen max-w-lg mx-auto w-full flex flex-col justify-center">
-      <KennedyAnyidoho />
-      <Links />
-    </main>
-  );
+  const docs = getAllDocs();
+  return <HomeView docs={docs} />;
 }
