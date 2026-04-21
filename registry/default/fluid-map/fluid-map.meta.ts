@@ -9,6 +9,10 @@ export const meta: CraftComponentMeta = {
   registryId: "@dziedzorm/fluid-map",
   x: "25%",
   y: "35%",
+  previews: [
+    { id: "default", title: "Default" },
+    { id: "glow", title: "With Hover Glow" },
+  ],
   examples: [
     {
       title: "Basic usage",
@@ -55,6 +59,21 @@ export function Demo() {
 
 export function Demo() {
   return <FluidMap fluid={false} />
+}`,
+    },
+    {
+      title: "With hover glow",
+      language: "tsx",
+      code: `import { FluidMap } from "@/components/fluid-map"
+
+export function Demo() {
+  return (
+    <FluidMap
+      markers={[{ lat: 7.9465, lng: -1.0232, size: 0.8, pulse: true }]}
+      markerColor="oklch(62.7% 0.265 303.9)"
+      glowColor="oklch(62.7% 0.265 303.9)"
+    />
+  )
 }`,
     },
   ],

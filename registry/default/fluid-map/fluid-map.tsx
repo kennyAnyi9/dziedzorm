@@ -46,6 +46,10 @@ export interface FluidMapProps<
     y: number;
     r: number;
   }) => React.ReactNode;
+  /** CSS color for dot glow effect (e.g., "oklch(62.7% 0.265 303.9)") */
+  glowColor?: string;
+  /** Glow blur radius in CSS pixels (default: 2) */
+  glowRadius?: number;
 }
 
 export function FluidMap<M extends Marker = Marker>({
@@ -62,6 +66,8 @@ export function FluidMap<M extends Marker = Marker>({
   fluidRadius = 20,
   fluidStrength = 0.4,
   renderMarkerOverlay,
+  glowColor,
+  glowRadius,
   className,
   style,
   ...svgProps
@@ -213,11 +219,13 @@ export function FluidMap<M extends Marker = Marker>({
           const el = dots[i] as SVGCircleElement;
           el.setAttribute("cx", String(ox[i]));
           el.setAttribute("cy", String(oy[i]));
+          if (glowColor) el.removeAttribute("filter");
           toRemove.push(i);
         } else {
           const el = dots[i] as SVGCircleElement;
           el.setAttribute("cx", String(ox[i] + dx[i]));
           el.setAttribute("cy", String(oy[i] + dy[i]));
+          if (glowColor) el.setAttribute("filter", "url(#fluid-map-dot-glow)");
         }
       }
 
@@ -263,6 +271,21 @@ export function FluidMap<M extends Marker = Marker>({
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+        {glowColor && (
+          <filter
+            id="fluid-map-dot-glow"
+            x="-150%"
+            y="-150%"
+            width="400%"
+            height="400%"
+          >
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        )}
       </defs>
 
       <g ref={dotsGroupRef}>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { BackButton } from "@/components/back-button";
 import { Ascii, fonts } from "better-ascii";
 
 export const metadata: Metadata = {
@@ -37,13 +38,7 @@ export default function ShippedPage() {
           Work built and shipped for companies through freelance, internships, and
           volunteering.
         </p>
-        <Link
-          href="/"
-          className="mt-4 inline-flex items-center gap-2 text-neutral-500 hover:text-neutral-200 transition-colors text-sm"
-        >
-          <ArrowLeft size={14} strokeWidth={1.5} />
-          back
-        </Link>
+        <BackButton href="/" className="mt-4" />
       </div>
       <div className="flex flex-col gap-5">
         {SHIPPED.map((item) => (

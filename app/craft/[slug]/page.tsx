@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { BackButton } from "@/components/back-button";
 import type { Metadata } from "next";
 import { getCraftComponent, CRAFT_COMPONENTS } from "@/lib/craft/components";
 import { CommandBlock } from "@/components/command-block";
 import { CodeBlock } from "@/components/code-block";
-import { FluidMapPreview } from "@/registry/default";
+import { FluidMapPreview, FluidMapGlowPreview } from "@/registry/default";
 
 export const dynamic = "force-static";
 
@@ -25,7 +25,10 @@ export async function generateMetadata({
 }
 
 const PREVIEWS: Record<string, Record<string, React.ReactNode>> = {
-  "fluid-map": { default: <FluidMapPreview /> },
+  "fluid-map": {
+    default: <FluidMapPreview />,
+    glow: <FluidMapGlowPreview />,
+  },
 };
 
 export default async function CraftDetailPage({
@@ -57,13 +60,7 @@ export default async function CraftDetailPage({
             </span>
           ))}
         </div>
-        <Link
-          href="/craft"
-          className="mt-4 inline-flex items-center gap-2 text-neutral-500 hover:text-neutral-200 transition-colors text-sm"
-        >
-          <ArrowLeft size={14} strokeWidth={1.5} />
-          craft
-        </Link>
+        <BackButton href="/craft" label="craft" className="mt-4" />
       </div>
 
       {/* Live preview(s) */}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { BackButton } from "@/components/back-button";
 import { Ascii, fonts } from "better-ascii";
 import { FluidMap } from "@/registry/default/fluid-map/fluid-map";
 import { CRAFT_COMPONENTS } from "@/lib/craft/components";
@@ -24,13 +24,7 @@ export default function CraftPage() {
         <p className="mt-2 text-neutral-600 text-sm">
           Handcrafted components. Copy, install, use freely.
         </p>
-        <Link
-          href="/"
-          className="mt-4 inline-flex items-center gap-2 text-neutral-500 hover:text-neutral-200 transition-colors text-sm"
-        >
-          <ArrowLeft size={14} strokeWidth={1.5} />
-          back
-        </Link>
+        <BackButton href="/" className="mt-4" />
       </div>
 
       {/* Map with component links */}

@@ -2,4 +2,4 @@
 // Contributors: add one line per component.
 
 export { meta as fluidMapMeta } from "./fluid-map/fluid-map.meta";
-export { FluidMapPreview } from "./fluid-map/fluid-map.preview";
+export { FluidMapPreview, FluidMapGlowPreview } from "./fluid-map/fluid-map.preview";

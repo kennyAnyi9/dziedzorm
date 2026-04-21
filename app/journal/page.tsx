@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { format } from "date-fns";
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { getAllDocs } from "@/lib/journal/documents";
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default function JournalPage() {
                 {format(new Date(post.metadata.createdAt), "dd.MM.yyyy")}
               </span>
               <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowRight size={16} />
+                <ChevronRight size={14} strokeWidth={1.5} />
               </span>
             </span>
           </Link>

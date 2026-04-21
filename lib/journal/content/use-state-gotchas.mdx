@@ -15,7 +15,7 @@ If you’ve used React’s `useState` hook, you already know how powerful it is 
 ### Gotcha 1: Update State Based on the Previous State
 
 When updating state in React, you’ll often encounter scenarios where the new value depends on the previous one. A common mistake is referencing the current state directly, like this:
-```state.jsx
+```jsx
 setCount(count + 1);
 ```
 While this may seem fine, it can lead to unexpected behavior when multiple updates occur in rapid succession, such as within event handlers or during React’s batched updates.
@@ -24,7 +24,7 @@ While this may seem fine, it can lead to unexpected behavior when multiple updat
 React doesn’t guarantee that `count` will hold the latest value when you call `setCount`. This can result in stale state, especially in scenarios with queued updates.
 
 **Example:**
-```state.jsx
+```jsx
 const handleClick = () => {
   setCount(count + 1);
   setCount(count + 1); // Only increments by 1, not 2, due to stale state!
@@ -34,12 +34,12 @@ const handleClick = () => {
 **The Solution: Use the Functional Update Pattern**
 
 The functional update pattern ensures your state updates always using the latest value. React provides a `prevState` argument, which reflects the most up-to-date state.
-```state.jsx
+```jsx
 setCount(prevCount => prevCount + 1);
 ```
 
 **Updated Example:**
-```state.jsx
+```jsx
 const handleClick = (increment = 1) => {
   setCount(prevCount => prevCount + increment);
   setCount(prevCount => prevCount + increment); // Now increments by 2 as expected!
@@ -58,7 +58,7 @@ When managing objects with `useState`, you need to avoid mutating the original o
 
 **Example:**
 Suppose you have a `user` object as your state:
-```state.jsx
+```jsx
 const [user, setUser] = useState({
   name: 'Alice',
   age: 30
@@ -66,7 +66,7 @@ const [user, setUser] = useState({
 ```
 
 If you try to update the user’s age like this:
-```state.jsx
+```jsx
 setUser(prevUser => { age: prevUser.age + 1 });
 ```
 
@@ -79,7 +79,7 @@ The state will mutate incorrectly, replacing the entire object with a partial up
 
 **The Correct Way:**
 Use the spread operator to create a new object that merges the updates with the existing properties:
-```state.jsx
+```jsx
 setUser(prevUser => ({ ...prevUser, age: prevUser.age + 1 }));
 ```
 
@@ -93,7 +93,7 @@ In class components, the constructor initializes state only once during the comp
 
 **Example:**
 If you compute the initial state like this:
-```state.jsx
+```jsx
 const [count, setCount] = useState(slowComputation());
 ```
 
@@ -101,7 +101,7 @@ The `slowComputation` function will run every time the component renders, even t
 
 **The Solution: Use the Lazy Initialization Form of useState**
 You can pass a function to `useState`, which will only be executed during the first render:
-```state.jsx
+```jsx
 const [count, setCount] = useState(() => {
   const initialCount = slowComputation();
   return initialCount;
@@ -115,7 +115,7 @@ This prevents unnecessary computations on subsequent renders, improving performa
 ### Gotcha 4: Using Multiple useState Hooks
 
 Each call to `useState` creates an independent piece of state. This means updating one state variable won’t affect others. For example:
-```state.jsx
+```jsx
 const [count, setCount] = useState(0);
 const [name, setName] = useState('Alice');
 ```

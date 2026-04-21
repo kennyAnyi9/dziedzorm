@@ -5,7 +5,7 @@ import { KennedyAnyidoho } from "@/components/kennedy-anyidoho";
 import { MapLinksOverlay } from "@/components/map-links";
 import { JournalOverlay } from "@/components/journal-overlay";
 import { FluidMap } from "@/registry/default/fluid-map/fluid-map";
-import { ArrowLeft } from "lucide-react";
+import { BackButton } from "@/components/back-button";
 import { Ascii, fonts } from "better-ascii";
 import type { Doc } from "@/lib/journal/types";
 import { playSound } from "@/lib/sound-engine";
@@ -48,16 +48,13 @@ export function HomeView({ docs }: { docs: Doc[] }) {
           <p className="mt-2 max-w-lg text-neutral-600 text-center">
             Thoughts, technical notes, and things I find interesting.
           </p>
-          <button
+          <BackButton
             onClick={() => {
               playSound(uChatScrollButtonSound.dataUri, { volume: 0.8 });
               setView("home");
             }}
-            className="mt-4 inline-flex items-center gap-2 text-neutral-500 hover:text-neutral-200 transition-colors text-sm cursor-pointer"
-          >
-            <ArrowLeft size={14} strokeWidth={1.5} />
-            back
-          </button>
+            className="mt-4"
+          />
         </div>
       </div>
 

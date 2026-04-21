@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { BackButton } from "@/components/back-button";
 import { MDX } from "@/components/mdx";
 import {
   findNeighbour,
@@ -45,6 +47,7 @@ export default async function JournalPost({
 
   return (
     <main className="min-h-screen max-w-3xl mx-auto w-full px-4 sm:px-6 py-16">
+      <BackButton href="/" className="mb-8" />
       <article className="prose prose-invert prose-neutral max-w-none">
         <h1>{doc.metadata.title}</h1>
         <p className="text-muted-foreground">{doc.metadata.description}</p>
@@ -61,15 +64,17 @@ export default async function JournalPost({
 
       <nav className="flex justify-between mt-12 text-neutral-400 text-sm">
         {previous ? (
-          <Link href={`/journal/${previous.slug}`}>
-            &larr; {previous.metadata.title}
+          <Link href={`/journal/${previous.slug}`} className="inline-flex items-center gap-1 hover:text-neutral-200 transition-colors">
+            <ChevronLeft size={14} strokeWidth={1.5} />
+            {previous.metadata.title}
           </Link>
         ) : (
           <span />
         )}
         {next ? (
-          <Link href={`/journal/${next.slug}`}>
-            {next.metadata.title} &rarr;
+          <Link href={`/journal/${next.slug}`} className="inline-flex items-center gap-1 hover:text-neutral-200 transition-colors">
+            {next.metadata.title}
+            <ChevronRight size={14} strokeWidth={1.5} />
           </Link>
         ) : (
           <span />

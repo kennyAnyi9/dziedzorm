@@ -3,11 +3,18 @@
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 
-export function CopyButton({ text }: { text: string }) {
+export function CopyButton({
+  text,
+  textFn,
+}: {
+  text?: string;
+  textFn?: () => string;
+}) {
   const [copied, setCopied] = useState(false);
 
   function copy() {
-    navigator.clipboard.writeText(text).then(() => {
+    const value = text ?? textFn?.() ?? "";
+    navigator.clipboard.writeText(value).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
