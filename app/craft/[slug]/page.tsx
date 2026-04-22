@@ -5,7 +5,8 @@ import type { Metadata } from "next";
 import { getCraftComponent, CRAFT_COMPONENTS } from "@/lib/craft/components";
 import { CommandBlock } from "@/components/command-block";
 import { CodeBlock } from "@/components/code-block";
-import { FluidMapPreview, FluidMapGlowPreview } from "@/registry/default";
+import { FluidMapPreview } from "@/registry/default";
+import { PreviewFrame } from "@/components/preview-frame";
 
 export const dynamic = "force-static";
 
@@ -27,7 +28,6 @@ export async function generateMetadata({
 const PREVIEWS: Record<string, Record<string, React.ReactNode>> = {
   "fluid-map": {
     default: <FluidMapPreview />,
-    glow: <FluidMapGlowPreview />,
   },
 };
 
@@ -63,30 +63,12 @@ export default async function CraftDetailPage({
         <BackButton href="/craft" label="craft" className="mt-4" />
       </div>
 
-      {/* Live preview(s) */}
-      {component.previews ? (
-        <div className="mb-10 flex flex-col gap-6">
-          {component.previews.map((preview) => (
-            <section key={preview.id}>
-              <p className="text-xs text-neutral-600 mb-3 uppercase tracking-widest">
-                {preview.title}
-              </p>
-              <div className="border border-neutral-800 rounded-xl bg-neutral-950 h-72 flex items-center justify-center px-4">
-                {slugPreviews[preview.id] ?? null}
-              </div>
-            </section>
-          ))}
-        </div>
-      ) : (
-        <section className="mb-10">
-          <p className="text-xs text-neutral-600 mb-3 uppercase tracking-widest">
-            Preview
-          </p>
-          <div className="border border-neutral-800 rounded-xl bg-neutral-950 h-72 flex items-center justify-center px-4">
-            {slugPreviews["default"] ?? null}
-          </div>
-        </section>
-      )}
+      {/* Live preview */}
+      <section className="mb-10">
+        <PreviewFrame>
+          {slugPreviews["default"] ?? null}
+        </PreviewFrame>
+      </section>
 
       {/* Install */}
       <section className="mb-10">

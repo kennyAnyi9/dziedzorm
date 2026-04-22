@@ -8,7 +8,11 @@
       "type": "registry:component",
       "title": "Fluid Map",
       "description": "A dotted world map with clockwise swirl physics on mouse interaction. Dots animate with spring-damping and settle like dust.",
-      "dependencies": ["svg-dotted-map"],
+      "dependencies": [
+        "svg-dotted-map",
+        "clsx",
+        "tailwind-merge"
+      ],
       "files": [
         {
           "path": "registry/default/fluid-map/fluid-map.tsx",
