@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { getCraftComponent, CRAFT_COMPONENTS } from "@/lib/craft/components";
 import { CommandBlock } from "@/components/command-block";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 import { FluidMapPreview } from "@/registry/default";
 import { PreviewFrame } from "@/components/preview-frame";
 
@@ -50,24 +51,12 @@ export default async function CraftDetailPage({
         <p className="mt-1.5 text-sm text-neutral-500">
           {component.description}
         </p>
-        <div className="flex flex-wrap gap-1.5 mt-3">
-          {component.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[10px] text-neutral-600 border border-neutral-800 rounded px-1.5 py-0.5"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
         <BackButton href="/craft" label="craft" className="mt-4" />
       </div>
 
       {/* Live preview */}
       <section className="mb-10">
-        <PreviewFrame>
-          {slugPreviews["default"] ?? null}
-        </PreviewFrame>
+        <PreviewFrame>{slugPreviews["default"] ?? null}</PreviewFrame>
       </section>
 
       {/* Install */}
@@ -100,11 +89,13 @@ export default async function CraftDetailPage({
             Open in v0
           </Link>
         </div>
-        <CommandBlock registryId={component.registryId} />
+        <CommandBlock
+          registryUrl={`https://dziedzorm.xyz/r/${component.slug}.json`}
+        />
       </section>
 
       {/* Usage */}
-      <section>
+      <section className="mb-10">
         <p className="text-xs text-neutral-600 mb-3 uppercase tracking-widest">
           Usage
         </p>
@@ -119,6 +110,16 @@ export default async function CraftDetailPage({
           ))}
         </div>
       </section>
+
+      {/* Props */}
+      {component.props && component.props.length > 0 && (
+        <section>
+          <p className="text-xs text-neutral-600 mb-3 uppercase tracking-widest">
+            Props
+          </p>
+          <PropsTable props={component.props} />
+        </section>
+      )}
     </main>
   );
 }

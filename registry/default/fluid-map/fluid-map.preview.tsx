@@ -10,6 +10,8 @@ export function FluidMapPreview() {
       dotRadius={0.15}
       dotColor="currentColor"
       className="opacity-60 text-neutral-700"
+      fluidStrength={3.5}
+      fluidRadius={8}
     />
   );
 }

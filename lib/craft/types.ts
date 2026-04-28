@@ -9,6 +9,14 @@ export type ComponentPreview = {
   title: string;
 };
 
+export type PropDef = {
+  name: string;
+  type: string;
+  default: string;
+  description: string;
+  required?: boolean;
+};
+
 export type CraftComponentMeta = {
   slug: string;
   title: string;
@@ -21,4 +29,5 @@ export type CraftComponentMeta = {
   /** If provided, multiple preview sections are shown on the detail page */
   previews?: ComponentPreview[];
   examples: CodeExample[];
+  props?: PropDef[];
 };

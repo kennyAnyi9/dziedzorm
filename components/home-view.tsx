@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { KennedyAnyidoho } from "@/components/kennedy-anyidoho";
-import { MapLinksOverlay } from "@/components/map-links";
+import { MapLinksOverlay, MapLinksMobile } from "@/components/map-links";
 import { JournalOverlay } from "@/components/journal-overlay";
 import { FluidMap } from "@/registry/default/fluid-map/fluid-map";
 import { BackButton } from "@/components/back-button";
@@ -58,13 +58,49 @@ export function HomeView({ docs }: { docs: Doc[] }) {
         </div>
       </div>
 
-      {/* Map — persistent background with swappable overlay */}
-      <div className="w-full max-w-5xl relative">
+      {/* Mobile map (< md) — faded map + centered list overlay */}
+      <div className="md:hidden w-full max-w-4xl relative">
+        <FluidMap
+          markers={[{ lat: 7.9465, lng: -1.0232, size: 0.8, pulse: true }]}
+          markerColor="oklch(62.7% 0.265 303.9)"
+          dotRadius={0.15}
+          className="opacity-20"
+          fluidStrength={3.5}
+          fluidRadius={8}
+        />
+        <div
+          className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+            isHome
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
+          }`}
+        >
+          <MapLinksMobile
+            onJournalClick={() => {
+              playSound(uChatScrollButtonSound.dataUri, { volume: 0.8 });
+              setView("journal");
+            }}
+          />
+        </div>
+        <JournalOverlay
+          docs={docs}
+          className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+            !isHome
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
+          }`}
+        />
+      </div>
+
+      {/* Desktop map (md+) — persistent background with swappable overlay */}
+      <div className="hidden md:block w-full max-w-5xl relative">
         <FluidMap
           markers={[{ lat: 7.9465, lng: -1.0232, size: 0.8, pulse: true }]}
           markerColor="oklch(62.7% 0.265 303.9)"
           dotRadius={0.15}
           className="opacity-50"
+          fluidStrength={3.5}
+          fluidRadius={8}
         />
 
         {/* Home links overlay */}
@@ -89,7 +125,6 @@ export function HomeView({ docs }: { docs: Doc[] }) {
           <JournalOverlay docs={docs} />
         </div>
       </div>
-
     </main>
   );
 }

@@ -9,6 +9,86 @@ export const meta: CraftComponentMeta = {
   registryId: "@dziedzorm/fluid-map",
   x: "25%",
   y: "35%",
+  props: [
+    {
+      name: "markers",
+      type: "Marker[]",
+      default: "[]",
+      description: "Array of lat/lng pins to render on the map. Each marker accepts lat, lng, size, and pulse.",
+    },
+    {
+      name: "markerColor",
+      type: "string",
+      default: '"#FF6900"',
+      description: "Fill color for all markers and their pulse rings.",
+    },
+    {
+      name: "dotColor",
+      type: "string",
+      default: '"currentColor"',
+      description: "Fill color for the map dots. Inherits from CSS color by default.",
+    },
+    {
+      name: "dotRadius",
+      type: "number",
+      default: "0.2",
+      description: "Radius of each dot in SVG coordinate units.",
+    },
+    {
+      name: "fluid",
+      type: "boolean",
+      default: "true",
+      description: "Enable repulsion physics on mouse interaction. Set to false for a static map.",
+    },
+    {
+      name: "fluidRadius",
+      type: "number",
+      default: "20",
+      description: "Radius of the cursor influence area in SVG units. Larger values affect more dots.",
+    },
+    {
+      name: "fluidStrength",
+      type: "number",
+      default: "0.4",
+      description: "Strength of the repulsion force applied to dots within the influence radius.",
+    },
+    {
+      name: "pulse",
+      type: "boolean",
+      default: "false",
+      description: "Force all markers to display a pulse ring, overriding per-marker pulse settings.",
+    },
+    {
+      name: "stagger",
+      type: "boolean",
+      default: "true",
+      description: "Offset odd rows by half a step to produce a natural hex-grid dot pattern.",
+    },
+    {
+      name: "mapSamples",
+      type: "number",
+      default: "5000",
+      description: "Total number of dots sampled to fill the map outline.",
+    },
+    {
+      name: "width",
+      type: "number",
+      default: "150",
+      description: "SVG coordinate width. Increase for more horizontal resolution.",
+    },
+    {
+      name: "height",
+      type: "number",
+      default: "75",
+      description: "SVG coordinate height. Increase for more vertical resolution.",
+    },
+    {
+      name: "renderMarkerOverlay",
+      type: "(args: { marker, index, x, y, r }) => ReactNode",
+      default: "undefined",
+      description: "Render custom SVG elements at each marker position. Receives computed x/y and radius.",
+    },
+  ],
   examples: [
     {
       title: "Basic usage",

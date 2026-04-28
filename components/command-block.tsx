@@ -8,16 +8,16 @@ type PackageManager = "bun" | "npm" | "pnpm" | "yarn";
 
 const PMS: PackageManager[] = ["bun", "npm", "pnpm", "yarn"];
 
-function buildCommand(pm: PackageManager, registryId: string): string {
+function buildCommand(pm: PackageManager, target: string): string {
   switch (pm) {
-    case "bun":  return `bunx --bun shadcn add ${registryId}`;
-    case "npm":  return `npx shadcn@latest add ${registryId}`;
-    case "pnpm": return `pnpm dlx shadcn@latest add ${registryId}`;
-    case "yarn": return `yarn dlx shadcn@latest add ${registryId}`;
+    case "bun":  return `bunx --bun shadcn add ${target}`;
+    case "npm":  return `npx shadcn@latest add ${target}`;
+    case "pnpm": return `pnpm dlx shadcn@latest add ${target}`;
+    case "yarn": return `yarn dlx shadcn@latest add ${target}`;
   }
 }
 
-export function CommandBlock({ registryId }: { registryId: string }) {
+export function CommandBlock({ registryUrl }: { registryUrl: string }) {
   const [pm, setPm] = useState<PackageManager>("bun");
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -35,7 +35,7 @@ export function CommandBlock({ registryId }: { registryId: string }) {
     if (el) setIndicatorStyle({ left: el.offsetLeft, width: el.offsetWidth });
   }, []);
 
-  const command = buildCommand(pm, registryId);
+  const command = buildCommand(pm, registryUrl);
 
   return (
     <div className="border border-neutral-800 rounded-lg overflow-hidden">

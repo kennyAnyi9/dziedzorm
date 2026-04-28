@@ -84,6 +84,53 @@ type MapLink = {
   id?: string;
 };
 
+export function MapLinksMobile({
+  onJournalClick,
+}: {
+  onJournalClick?: () => void;
+}) {
+  return (
+    <div className="flex flex-col gap-4">
+      {MAP_LINKS.map((link) => {
+        const isJournal = link.id === "journal";
+        const commonClass =
+          "group inline-flex items-center gap-2.5 text-sm text-neutral-400 hover:text-neutral-200 active:text-neutral-200 transition-colors cursor-pointer";
+
+        const content = (
+          <>
+            {link.icon && (
+              <span className="size-6 rounded-md border border-neutral-700 flex items-center justify-center transition-all duration-300 group-hover:border-[oklch(62.7%_0.265_303.9)] group-hover:[box-shadow:0_0_8px_oklch(62.7%_0.265_303.9)]">
+                <link.icon size={12} strokeWidth={1} />
+              </span>
+            )}
+            <span>{link.text}</span>
+            {link.external && <ArrowUpRight size={12} />}
+          </>
+        );
+
+        if (isJournal && onJournalClick) {
+          return (
+            <button key={link.href} onClick={onJournalClick} className={commonClass}>
+              {content}
+            </button>
+          );
+        }
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className={commonClass}
+          >
+            {content}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 const MAP_LINKS: MapLink[] = [
   {
     href: "https://better-ascii.dziedzorm.xyz",

@@ -47,7 +47,7 @@ export default async function JournalPost({
 
   return (
     <main className="min-h-screen max-w-3xl mx-auto w-full px-4 sm:px-6 py-16">
-      <BackButton href="/" className="mb-8" />
+      <BackButton href="/journal" label="journal" className="mb-8" />
       <article className="prose prose-invert prose-neutral max-w-none">
         <h1>{doc.metadata.title}</h1>
         <p className="text-muted-foreground">{doc.metadata.description}</p>
