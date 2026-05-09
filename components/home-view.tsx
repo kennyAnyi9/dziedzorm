@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { KennedyAnyidoho } from "@/components/kennedy-anyidoho";
 import { MapLinksOverlay, MapLinksMobile } from "@/components/map-links";
 import { JournalOverlay } from "@/components/journal-overlay";
@@ -11,10 +11,20 @@ import type { Doc } from "@/lib/journal/types";
 import { playSound } from "@/lib/sound-engine";
 import { uChatScrollButtonSound } from "@/lib/u-chat-scroll-button";
 
-type View = "home" | "journal";
-
 export function HomeView({ docs }: { docs: Doc[] }) {
-  const [view, setView] = useState<View>("home");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const view = searchParams.get("view") === "journal" ? "journal" : "home";
+
+  function goToJournal() {
+    playSound(uChatScrollButtonSound.dataUri, { volume: 0.8 });
+    router.push("/?view=journal");
+  }
+
+  function goToHome() {
+    playSound(uChatScrollButtonSound.dataUri, { volume: 0.8 });
+    router.back();
+  }
 
   const isHome = view === "home";
 
@@ -49,10 +59,7 @@ export function HomeView({ docs }: { docs: Doc[] }) {
             Thoughts, technical notes, and things I find interesting.
           </p>
           <BackButton
-            onClick={() => {
-              playSound(uChatScrollButtonSound.dataUri, { volume: 0.8 });
-              setView("home");
-            }}
+            onClick={goToHome}
             className="mt-4"
           />
         </div>
@@ -76,10 +83,7 @@ export function HomeView({ docs }: { docs: Doc[] }) {
           }`}
         >
           <MapLinksMobile
-            onJournalClick={() => {
-              playSound(uChatScrollButtonSound.dataUri, { volume: 0.8 });
-              setView("journal");
-            }}
+            onJournalClick={goToJournal}
           />
         </div>
         <JournalOverlay
@@ -111,7 +115,7 @@ export function HomeView({ docs }: { docs: Doc[] }) {
               : "opacity-0 pointer-events-none"
           }`}
         >
-          <MapLinksOverlay onJournalClick={() => setView("journal")} />
+          <MapLinksOverlay onJournalClick={goToJournal} />
         </div>
 
         {/* Journal overlay */}

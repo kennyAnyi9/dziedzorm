@@ -11,6 +11,7 @@ export function JournalOverlay({ docs, className }: { docs: Doc[]; className?: s
           <Link
             key={doc.slug}
             href={`/journal/${doc.slug}`}
+            replace
             className="group relative flex flex-wrap items-center gap-x-3 gap-y-0.5 md:inline-flex md:flex-nowrap md:whitespace-nowrap md:w-fit text-base text-neutral-400 hover:text-neutral-200 transition-colors"
           >
             <span className="text-xs text-neutral-600 shrink-0">{String(i + 1).padStart(2, "0")}</span>

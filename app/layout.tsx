@@ -14,8 +14,25 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KENNEDY ANYIDOHO",
-  description: "My personal portolfio app",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  title: {
+    default: "Kennedy Anyidoho",
+    template: "%s — Kennedy Anyidoho",
+  },
+  description: "Kennedy Anyidoho — software engineer building products and writing about code.",
+  keywords: ["Kennedy Anyidoho", "Kennedy", "software engineer", "portfolio", "web development"],
+  authors: [{ name: "Kennedy Anyidoho" }],
+  openGraph: {
+    type: "website",
+    siteName: "Kennedy Anyidoho",
+    title: "Kennedy Anyidoho",
+    description: "Software engineer building products and writing about code.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kennedy Anyidoho",
+    description: "Software engineer building products and writing about code.",
+  },
 };
 
 export default function RootLayout({
@@ -33,6 +50,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
+          forcedTheme="dark"
           enableSystem={false}
         >
           <LiquidGlassFilters />

@@ -30,6 +30,19 @@ export async function generateMetadata({
   return {
     title: doc.metadata.title,
     description: doc.metadata.description,
+    openGraph: {
+      type: "article",
+      title: doc.metadata.title,
+      description: doc.metadata.description,
+      publishedTime: doc.metadata.createdAt,
+      modifiedTime: doc.metadata.updatedAt,
+      authors: ["Kennedy Anyidoho"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: doc.metadata.title,
+      description: doc.metadata.description,
+    },
   };
 }
 
@@ -47,7 +60,7 @@ export default async function JournalPost({
 
   return (
     <main className="min-h-screen max-w-3xl mx-auto w-full px-4 sm:px-6 py-16">
-      <BackButton href="/journal" label="journal" className="mb-8" />
+      <BackButton href="/?view=journal" label="journal" className="mb-8" />
       <article className="prose prose-invert prose-neutral max-w-none">
         <h1>{doc.metadata.title}</h1>
         <p className="text-muted-foreground">{doc.metadata.description}</p>
